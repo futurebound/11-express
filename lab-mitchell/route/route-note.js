@@ -27,7 +27,7 @@ module.exports = function(router) {
     //no longer making GET request with querystring
     storage.fetchOne('note', req.params._id) //querystring would be req.query._id
       .then(buffer => buffer.toString()) //returns a stringified version of buffer, and that in form of key:value pairs which we know is JSON form, so we can JSON parse to get those separated in following line
-      .then(json => JSON.parse(json)) //parses 
+      .then(json => JSON.parse(json)) //parses then reparses SO WE CAN SEND CORRECT HEADER WITH IT
       .then(note => res.status(200).json(note)) //parse it out of JSON then flip it back in reponse GO BACK TO VID FOR EXPLANATION
       .catch(err => errorHandler(err, res));
   });
