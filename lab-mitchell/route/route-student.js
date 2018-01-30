@@ -42,13 +42,14 @@ module.exports = function(router) {
       .catch(err => errorHandler(err, res));
   });
 
-  router.put('/student/:_id', (req, res) => {
+  router.put('/student/:_id', bodyParser, (req, res) => {
     debug('PUT /api/v1/student');
     return new Student(req.body.name, req.body.city)
       .then(item => {
         item = req.body._id;
         return item;
       })
+      .then((item) => debug(`PUT /api/v1/student item: ${item}`))
       .then(item => storage.update('student', req.params._id, item))
       .then(student => res.status(204).json(student)) 
       .catch(err => errorHandler(err, res));

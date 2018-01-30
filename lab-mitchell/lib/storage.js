@@ -11,6 +11,7 @@
 const Promise = require('bluebird'); //overwrites defaul promise
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'}); //promisifies files, gives suffix
 const storage = module.exports = {};
+const errorHandler = require('../lib/error-handler');
 const debug = require('debug')('http:storage');
 
 storage.create = (schema, item) => {
@@ -62,8 +63,8 @@ storage.update = (schema, itemId, item) => {
   return fs.readFileProm(`${__dirname}/../data/${schema}/${itemId}.json`)
     .then(() => {
       fs.writeFileProm(`${__dirname}/../data/${schema}/${itemId}.json`, json);
-    });
-  // .then(() => item)
+    })
+    .catch(err => errorHandler(err, res));
 };
 
 // //storage.destroy just to differentiate from the .delete HTTP method
