@@ -16,7 +16,7 @@ app.use('/api/v1', router); //tells express 2 things
 
 
 //route setup
-require('../route/route-note')(router); //this that inject thing, to make sure we using the same instance of router for everything
+require('../route/route-student')(router); //this that inject thing, to make sure we using the same instance of router for everything
 //it mounts any routes we set up in those modules to that router, and then part of the application b/c we've mounter the router to the app
 app.use('/{0}', (req, res) => { //catchall for anything, what you're asking for doesn't exist in any of my route files so i create an error path err 404 and hand that over to error handler
   //app.use may need to be '/{0,}'
