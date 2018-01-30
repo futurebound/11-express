@@ -10,5 +10,7 @@ module.exports = function(name, city) {
     this.city = city;
 
     return resolve(this); //resolves new object, meaning .then() will have access to the object created
+    //so when creating a new student instance we can use it's information in follow .then's
+    //
   });
 };
