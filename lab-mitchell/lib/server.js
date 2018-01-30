@@ -35,6 +35,7 @@ app.use('/{0,}', (req, res) => { //catchall for anything, what you're asking for
 //server controls
 const server = module.exports = {};
 server.isOn = false; //so if PORT already being used, allows us to start up and validate that its not running already
+server.http = null;
 //if it is running, going to catch that error and do something. layer of testability and dev-defined layer of handling someone trying to start server if already running
 
 server.start = function(port, callback) { //can cache return value of server.start if we need it somewhere
@@ -46,5 +47,6 @@ server.start = function(port, callback) { //can cache return value of server.sta
 server.stop = function(callback) { //callback whatever you want it to be
   if(!server.isOn) return callback(new Error('Server not running'));
   server.isOn = false;
-  return app.close(callback);
+  server.http.close();
+  // return app.close(callback);
 };

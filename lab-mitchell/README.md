@@ -1,4 +1,4 @@
-# Lab 11 ~ Single Resource Express API
+# Lab 12 ~ Express Middleware
 
 **Author**: Mitchell
 **Version**: 1.0.0
@@ -22,4 +22,3 @@ To get this application up and running, fork and/or clone this repository using 
 [FS Docs](https://nodejs.org/dist/latest-v9.x/docs/api/fs.html) ~ https://nodejs.org/dist/latest-v9.x/docs/api/fs.html
 [Jest Docs](https://facebook.github.io/jest/) ~ https://facebook.github.io/jest/
 [UUID Docs](https://www.npmjs.com/package/uuid) ~ https://www.npmjs.com/package/uuid
-
