@@ -44,30 +44,23 @@ storage.create = (schema, item) => {
 // }
 
 storage.fetchOne = (schema, itemId) => {
-  fs.readFileProm(`${__dirname}/../data/${schema}/${itemId}.json`) //will return buffer, implication that buffer will be handled elsewhere
+  return fs.readFileProm(`${__dirname}/../data/${schema}/${itemId}.json`); //will return buffer, implication that buffer will be handled elsewhere
   //if schema or itemId does not match for the record, will error out and error will be caught elsewhere (error-handler.js)
-
 };
 
-storage.fetchAll = function(schema) {
-  return new Promise((resolve, reject) => {
+storage.fetchAll = (schema) => {
+  return fs.readdirProm(`${__dirname}/../data/${schema}`); //readdirProm b/c you're getting everything in the directory instead of a specific file
+};
 
-  });
-}
+storage.update = (schema, itemId, item) => {
+  // let fileToUpdate= {"_id": itemId, "name": body.name, "city": body.city}
+  let fileToUpdate = fs.readFileProm(`${__dirname}/../data/${schema}/${itemId}.json`);
+  let json = JSON.stringify(fileToUpdate);
+  return fs.writeFileProm(`${__dirname}/../data/${schema}/${itemId}.json`, json);
+  // .then(() => item)
+};
 
-storage.update = function(schema, itemId, item) {
-  return new Promise((resolve, reject) => {
-
-
-
-
-  });
-}
-
-//storage.destroy just to differentiate from the .delete HTTP method
+// //storage.destroy just to differentiate from the .delete HTTP method
 storage.destroy = function(schema, itemId) {
-  return new Promise((resolve, reject) => {
-
-
-  });
-}
+  return fs.unlinkProm(`${__dirname}/../data/${schema}/${itemId}.json`);
+};
