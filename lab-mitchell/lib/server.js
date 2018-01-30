@@ -2,6 +2,7 @@
 
 //application dependencies
 const express = require('express');
+const cors = require('cors');
 const errorHandler = require('./error-handler');
 
 //application setup
@@ -13,6 +14,8 @@ app.use('/api/v1/student', router); //using /api/v1/student means we have to cha
 //tells express 2 things
 // all routes should have a base of /api/v1, and more specifically all routes mounterd to this router
 // app.use essentially way for us to say 'hey express/app, i want you to use this middleware.' the router is a piece of middleware
+
+app.use(cors());
 
 // app.use(bodyParser); //somewhat incorrect way, says THIS IS GLOBAL MIDDLWARE, ATTACH TO EVERY ROUTE IN APPLICATION
 

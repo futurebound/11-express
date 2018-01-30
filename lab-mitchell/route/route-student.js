@@ -20,6 +20,7 @@ module.exports = function(router) {
       //due to changes to storage.create(), must do the follow line before .then(student => ...)
       .then(student => newStudent = student)
       .then(student => JSON.stringify(student)) //stringifies since we removed that part from the .create() method
+      //can also .then(student => storage.create('student', newStudent._id, student)) the json is just to remind us that the entire student item is being passed so that we do the .json(newStudent below)
       .then(json => storage.create('student', newStudent._id, json)) //return value of storage.create is JSON
       //note schema has lower case n in note, unlike last week where it was Note, b/c the directory is named note in data directory not Note
       .then(() => res.status(201).json(newStudent))
@@ -67,9 +68,10 @@ module.exports = function(router) {
       .then(buffer => buffer.toString())
       .then(json => JSON.parse(json)) //to get it into a JS object
       .then(student => ({
+        //the way this is structure, ||, allows for updating one or the other not both at the same time
         _id: req.params._id,
         name: req.body.name || student.title, //ensure can send complete or part thing and will update anyways with the ||
-        city: req.body.city || student.city
+        city: req.body.city || student.city,
       })) //parens around {} in arrow function, returning object literal not creating a code block
       .then(student => JSON.stringify(student))
       .then(json => storage.update('student', req.params._id, json))
@@ -83,7 +85,7 @@ module.exports = function(router) {
     storage.destroy('student', req.params._id)
       // .then(buffer => buffer.toString())
       // .then(json => JSON.parse(json)) 
-      .then(() => res.status(204)) // removed .json(student)) off then end since not sending something back to client like with GET request
+      .then(() => res.sendStatus(204)) // removed .json(student)) off then end since not sending something back to client like with GET request
       .catch(err => errorHandler(err, res));
   });
 };

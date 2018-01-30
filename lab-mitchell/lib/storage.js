@@ -36,7 +36,7 @@ const basePath = `${__dirname}/../data`;
 let writer = (schema, id, json) =>
   fs.writeFileProm(`${basePath}/${schema}/${id}.json`, json);
 
-let reader = (schema, path, id) => //optionally id
+let reader = (schema, id) => //optionally id
   fs.readFileProm(`${basePath}/${schema}/${id}.json`);
 
 storage.create = (schema, id, item) => writer(schema, id, item);
