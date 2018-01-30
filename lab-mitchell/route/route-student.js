@@ -44,9 +44,12 @@ module.exports = function(router) {
 
   router.put('/student/:_id', (req, res) => {
     debug('PUT /api/v1/student');
-    storage.update('student', req.params._id, req.body)
-      .then(buffer => buffer.toString()) 
-      .then(json => JSON.parse(json)) 
+    return new Student(req.body.name, req.body.city)
+      .then(item => {
+        item = req.body._id;
+        return item;
+      })
+      .then(item => storage.update('student', req.params._id, item))
       .then(student => res.status(204).json(student)) 
       .catch(err => errorHandler(err, res));
   });

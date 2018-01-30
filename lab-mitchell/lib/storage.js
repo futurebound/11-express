@@ -11,6 +11,7 @@
 const Promise = require('bluebird'); //overwrites defaul promise
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'}); //promisifies files, gives suffix
 const storage = module.exports = {};
+const debug = require('debug')('http:storage');
 
 storage.create = (schema, item) => {
   //stringifying item that was passed in, new note, then handing off to fs.writeFile so it can be put in our data/storage directory
@@ -44,23 +45,29 @@ storage.create = (schema, item) => {
 // }
 
 storage.fetchOne = (schema, itemId) => {
+  debug(`fetchOne itemId: ${itemId}`);
   return fs.readFileProm(`${__dirname}/../data/${schema}/${itemId}.json`); //will return buffer, implication that buffer will be handled elsewhere
   //if schema or itemId does not match for the record, will error out and error will be caught elsewhere (error-handler.js)
 };
 
 storage.fetchAll = (schema) => {
+  debug(`fetchAll schema: ${schema}`);
   return fs.readdirProm(`${__dirname}/../data/${schema}`); //readdirProm b/c you're getting everything in the directory instead of a specific file
 };
 
 storage.update = (schema, itemId, item) => {
+  debug(`update item: ${item}`);
   // let fileToUpdate= {"_id": itemId, "name": body.name, "city": body.city}
-  let fileToUpdate = fs.readFileProm(`${__dirname}/../data/${schema}/${itemId}.json`);
-  let json = JSON.stringify(fileToUpdate);
-  return fs.writeFileProm(`${__dirname}/../data/${schema}/${itemId}.json`, json);
+  let json = JSON.stringify(item);
+  return fs.readFileProm(`${__dirname}/../data/${schema}/${itemId}.json`)
+    .then(() => {
+      fs.writeFileProm(`${__dirname}/../data/${schema}/${itemId}.json`, json);
+    });
   // .then(() => item)
 };
 
 // //storage.destroy just to differentiate from the .delete HTTP method
 storage.destroy = function(schema, itemId) {
+  debug(`destroy itemId: ${itemId}`);
   return fs.unlinkProm(`${__dirname}/../data/${schema}/${itemId}.json`);
 };
