@@ -18,7 +18,7 @@ module.exports = function(router) {
 
     new Student(req.body.name, req.body.city)
       //due to changes to storage.create(), must do the follow line before .then(student => ...)
-      .then(student => newStudent = student)
+      .then(student => newStudent = student) //will just return the value of student
       .then(student => JSON.stringify(student)) //stringifies since we removed that part from the .create() method
       //can also .then(student => storage.create('student', newStudent._id, student)) the json is just to remind us that the entire student item is being passed so that we do the .json(newStudent below)
       .then(json => storage.create('student', newStudent._id, json)) //return value of storage.create is JSON
