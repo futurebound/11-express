@@ -70,7 +70,7 @@ module.exports = function(router) {
       .then(student => ({
         //the way this is structure, ||, allows for updating one or the other not both at the same time
         _id: req.params._id,
-        name: req.body.name || student.title, //ensure can send complete or part thing and will update anyways with the ||
+        name: req.body.name || student.name, //ensure can send complete or part thing and will update anyways with the ||
         city: req.body.city || student.city,
       })) //parens around {} in arrow function, returning object literal not creating a code block
       .then(student => JSON.stringify(student))
