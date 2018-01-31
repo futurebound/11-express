@@ -9,10 +9,10 @@ const debug = require('debug')('http:storage');
 const basePath = `${__dirname}/../data`;
 
 let writer = (schema, id, json) =>
-  fs.writeFileProm(`${basePath}/${schema}/${id}.json`, json);
+  fs.writeFileProm(`${basePath}/${schema}/${id}.json`, json); //doesnt return anything, so the , json at the end returns the item
 
 let reader = (schema, id) => //optionally id
-  fs.readFileProm(`${basePath}/${schema}/${id}.json`);
+  fs.readFileProm(`${basePath}/${schema}/${id}.json`); //returns buffer
 
 storage.create = (schema, id, item) => writer(schema, id, item);
 storage.fetchOne= (schema, itemId) => reader(schema, itemId);

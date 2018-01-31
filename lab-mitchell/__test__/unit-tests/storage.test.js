@@ -1,12 +1,14 @@
 'use strict';
 
-const server = require('../../lib/server');
+const storage = require('../../lib/storage');
 require('jest');
 
 describe('#storage.test.js', function () {
-  beforeAll(() => server.start(3002, () => console.log(`listening on 3002`)));
-  afterAll(() => server.stop(() => console.log('stopping server')));
+  describe('', function() {
 
-  describe('')
+    it('')
 
+
+
+  });
 });

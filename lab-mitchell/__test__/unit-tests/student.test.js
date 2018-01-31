@@ -6,8 +6,6 @@ require('jest');
 
 describe('#student.test.js', function () {
   describe('testing new Student instances', function() {
-  
-    //toHaveInstanceOf
 
     it('should return a promise object instance', () => {
       return new Student('reginald', 'lemonberry')
