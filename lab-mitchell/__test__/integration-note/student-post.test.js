@@ -12,7 +12,7 @@ describe('#student-post.test.js', function () {
     beforeAll(() => {
       this.testStudent = {name: 'ooga', city: 'booga'}; //may lift this up into outer describe block so available, more readable even tho testStudent availabe in lower describe block for invalid req/res
       return superagent.post(':4003/api/v1/student')
-        .sent(this.testStudent)
+        .send(this.testStudent)
         .then(res => this.response = res);
     });
 
