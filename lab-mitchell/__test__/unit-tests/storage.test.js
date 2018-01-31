@@ -5,9 +5,14 @@ const fs = require('fs');
 require('jest');
 
 describe('#storage.test.js', function () {
+  let test = test;
+
+
   describe('', function() {
 
-    it('')
+    it('', () => {
+
+    });
 
 
 

@@ -9,15 +9,14 @@ describe('#error-handler.js', function() {
       this.error = error; //holds the error object in its entirety
       this.message = null; //reassigned when res.send() is triggered with given message
       this.code = null; //reassigned when res.status() is triggered with given error code 
-
     }
     send(msg) { //has to be same name as in the error-handler.js file e.g. res.status.SEND
       this.message = msg; 
-      return this;
+      return this; //return this allows you to chain the methods, like promise.then()
     }
     status(code) { //has to be same name as in the error-handler.js file e.g. res.STATUS.send
       this.code = code;
-      return this;
+      return this; //return this allows you to chain the methods, like promise.then()
     }
   };
   
@@ -27,7 +26,7 @@ describe('#error-handler.js', function() {
   let enoentError = new Res(new Error('ENOENT'));
   let defaultError = new Res(new Error('radaradarada'));
 
-  describe('', () => {
+  describe('different error code/message validations', () => {
     it('should return 400 code for validation error', () => {
       expect(errorHandler(validationError.error, validationError).code).toBe(400);
     });
@@ -56,5 +55,4 @@ describe('#error-handler.js', function() {
       expect(errorHandler(defaultError.error, defaultError).message).toEqual('Error: radaradarada');
     });
   });
-
 });

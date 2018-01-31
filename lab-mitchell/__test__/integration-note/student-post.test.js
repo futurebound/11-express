@@ -4,6 +4,8 @@ const server = require('../../lib/server');
 const superagent = require('superagent');
 require('jest');
 
+//can include let api = `:{port}/api/v1/student`
+
 describe('#student-post.test.js', function () {
   beforeAll(() => server.start(4003, () => console.log(`listening on 4003`)));
   afterAll(() => server.stop(() => console.log('stopping server')));

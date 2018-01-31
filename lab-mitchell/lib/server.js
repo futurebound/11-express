@@ -41,7 +41,9 @@ server.http = null;
 server.start = function(port, callback) { //can cache return value of server.start if we need it somewhere
   if(server.isOn) return callback(new Error('Server running, cannot start server'));
   server.isOn = true;
-  return app.listen(port, callback); //sets up server listening on a port, and back in entry point, the callback in index.js will be returned and executed there
+  server.http = app.listen(port, callback);
+
+  // return app.listen(port, callback); //sets up server listening on a port, and back in entry point, the callback in index.js will be returned and executed there
 };
 
 server.stop = function(callback) { //callback whatever you want it to be
