@@ -3,8 +3,8 @@
 const Promise = require('bluebird'); //overwrites defaul promise
 const fs = Promise.promisifyAll(require('fs'), {suffix: 'Prom'}); //promisifies files, gives suffix
 const storage = module.exports = {};
-const errorHandler = require('../lib/error-handler');
-const debug = require('debug')('http:storage');
+// const errorHandler = require('../lib/error-handler');
+// const debug = require('debug')('http:storage');
 
 const basePath = `${__dirname}/../data`;
 
