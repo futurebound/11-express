@@ -43,6 +43,7 @@ server.start = function(port, callback) { //can cache return value of server.sta
   server.isOn = true;
   server.http = app.listen(port, callback);
 
+  //below line wasn't working properly, wasnt allowing the server to actually close by just returning app
   // return app.listen(port, callback); //sets up server listening on a port, and back in entry point, the callback in index.js will be returned and executed there
 };
 
