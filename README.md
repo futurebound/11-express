@@ -1,4 +1,4 @@
-![cf](https://i.imgur.com/7v5ASc8.png) 11: Single Resource Express API
+![cf](https://i.imgur.com/7v5ASc8.png) 12: Express Middleware
 ======
 
 ## Submission Instructions
@@ -10,43 +10,25 @@
   * write a question and observation on canvas
 
 ## Learning Objectives
-* students will be able to create a single resource API using the express framework
-* students will be able to leverage 3rd party helper modules for debugging, logging, and handling errors
+* students will be able to work with application, router, and 3rd party middleware through the use of express.js
+* students will be able to implement custom middleware through the use of express.js
+* students will be able to create custom routers for a specific resource
 
 ## Requirements
 
 #### Configuration
 * `package.json`
-* `.eslintrc.json`
+* `.eslintrc`
 * `.gitignore`
 * `README.md`
   * your `README.md` should include detailed instructions on how to use your API
 
 #### Feature Tasks
-* create an HTTP server using `express`
-* create a object constructor that creates a _simple resource_ with at least 3 properties
-    * it can **not** have the same properties as the in-class sample code (other than the `id`)
-    * a unique `_id` property should be included *(uuid)*
-    * include two additional properties of your choice
-* use the JSON parser included with the `body-parser` module as a middleware component to parse the request body on `POST` and `PUT` routes
-* use the npm `debug` module to log the methods in your application
-* create any `npm` scripts to automate the development process
-* persist your API data using the storage module and file system persistence
-
-#### Server Endpoints
-* **`/api/v1/simple-resource-name`**
-* `POST` request
-    * pass data as stringifed JSON in the body of a **POST** request to create a new resource
-* `GET` request
-    * pass `/:_id` as a parameter to retrieve a specific resource (as JSON)
-* `PUT` request
-    * pass `/:_id` as a parameter with a body of data to **UPDATE** a pre-existing resource
-* `DELETE` request
-    * pass `/:_id` as a parameter to **DELETE** a specific resource
-    * this should return a 204 status code with no content in the body
-
-
-## Stretch:
-#### Tests
-* write a test to ensure that your api returns a status code of 404 for routes that have not been registered
-* write tests to ensure the `/api/v1/simple-resource-name` endpoint responds as expected.
+* Complete the test suite for your API, including all request methods and any error handling potentialities.
+* Integration test each request method for your resource, including successful and unsuccessful scenarios.
+    - Ensure that you've covered differential outcomes for 400 vs 404
+* Unit test the following modules:
+    1. `model/note.js`
+    2. `lib/error-handler.js`
+    3. `lib/storage.js`
+    - Ensure that your unit tests are not dependant on any other functionality within the app. Each method should have input/output dedicated to the focus of the test.

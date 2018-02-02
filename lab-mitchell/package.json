@@ -1,20 +1,24 @@
 {
-  "name": "day11-demo-notes",
+  "name": "lab12-mitchell",
   "version": "1.0.0",
-  "description": "lecture notes for personal use from day 11 express lecture",
+  "description": "**Author**: Mitchell **Version**: 1.0.0",
   "main": "index.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
-    "test": "jest",
-    "lint": "eslint",
+    "test": "jest -i",
+    "lint": "eslint .",
     "start": "nodemon index.js",
     "test:debug": "DEBUG=http* jest -i",
+    "test:watch": "jest -i --watchAll",
     "start:watch": "nodemon index.js",
     "start:debug": "DEBUG=http* nodemon index.js"
   },
   "jest": {
+    "setupFiles": [
+      "./__test__/lib/jest-setup.js"
+    ],
     "verbose": true,
     "testEnvironment": "node",
     "collectCoverage": true,
@@ -34,6 +38,7 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
     "uuid": "^3.2.1"
   },
